@@ -15,6 +15,8 @@ void push(int x)
 	alfaptr node;
 	node = (alfaptr)malloc(sizeof(struct alfa));
 	node->x = x;
+	node->next = NULL;
+
 	if (!front)
 		front = node;
 	else {
@@ -31,11 +33,24 @@ void pop()
 	else
 	{
 		node = front->next;
+		free(front);
 		front = node;
+
+		if (!front)
+		{
+			rear = NULL;
+		}
+		
 	}
 }
 void search(int x)
 {
+	if (!front)
+	{
+		printf("ERROR1");
+		return;
+	}
+
 	alfaptr node = front;
 	int counter = 0;
 	while (node)
@@ -46,14 +61,31 @@ void search(int x)
 			break;
 		}
 		node = node->next;
+		counter++;
 }
 
 void rpop() {//pop last element
 	alfaptr node = front;
+	alfaptr prev = NULL;
+
 	while (node)
+	{
+		prev = node;
 		node = node->next;
-	free(rear);
-	rear = node;
+	}
+
+	if (node == front)
+	{
+		free(front);
+		front = NULL;
+		rear = NULL;
+	} else if (prev)
+	{
+		free(prev->next);
+		prev->next = NULL;
+		rear = prev;
+	}
+	
 }
 
 void set()
@@ -66,9 +98,12 @@ void set()
 int size()
 {
 	alfaptr node = front;
-	int count;
+	int count = 0;
 	while (node)
+	{
 		count++;node = node->next;
+	}
+	
 	return count;
 }
 
@@ -88,7 +123,7 @@ int average()
 {
 
 	alfaptr node = front;
-	int sum = 0, count;
+	int sum = 0, count = 0;
 	while (node) {
 		sum += node->x;
 		count++;
@@ -97,7 +132,7 @@ int average()
 	return sum / count;
 }
 
-void main()
+int main()
 {
 	int cmd;
 	long long int x;
