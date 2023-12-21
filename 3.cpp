@@ -9,7 +9,9 @@ struct alfa {
 	long long x;
 	alfaptr next;
 };
+
 alfaptr rear = NULL, front = NULL;
+
 void push(int x)
 {
 	alfaptr node;
@@ -34,6 +36,7 @@ void pop()
 		front = node;
 	}
 }
+
 void search(int x)
 {
 	alfaptr node = front;
@@ -97,7 +100,7 @@ int average()
 	return sum / count;
 }
 
-void main()
+int main()
 {
 	int cmd;
 	long long int x;

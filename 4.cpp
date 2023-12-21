@@ -1,3 +1,4 @@
+//reviewed
 #include<stdio.h>
 int main()
 {
@@ -7,3 +8,9 @@ int main()
     printf("%f", *ptr2 - *ptr1);
     return 0;
 }
+
+
+// *ptr1 = 12.5
+// *ptr2 = 90.5
+// result line = 90.5 - 12.5 = 78.0000
+// so there is no problem
